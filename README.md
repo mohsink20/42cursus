@@ -1,1 +1,1 @@
-# 42SG---Core
+# 42SG-Core
