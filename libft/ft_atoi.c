@@ -16,7 +16,7 @@ int	ft_atoi(const char *s)
 			sign = -1;
 	while (ft_isdigit(*s))
 	{
-		if ((result >= 0) != ((res << 1) >= 0) ||
+		if ((result >= 0) != ((result << 1) >= 0) ||
 				(result >= 0) != ((result << 2) >= 0) ||
 				(result >= 0) != ((result << 3) >= 0) ||
 				(result >= 0) != (result * 10 + (*s - '0') >= 0))
