@@ -1,7 +1,6 @@
-CFLAGS = -Wall -Wextra -Werror
+NAME					= libft.a
 
-TARGET = libft.a
-SOURCES = SRCS					= ft_atoi.c \
+SRCS					= ft_atoi.c \
 					  ft_bzero.c \
 					  ft_calloc.c \
 					  ft_isalnum.c \
@@ -46,23 +45,28 @@ BNS_SRCS				= ft_lstsize.c \
 					  ft_lstmap.c \
 					  ft_lstnew.c
 
-OBJECTS = $(SOURCES:.c=.o)
+OBJS					= $(SRCS:%.c=%.o)
 
-BNS_OBJS = $(BNS_SRCS:%.c=%.o)
+BNS_OBJS				= $(BNS_SRCS:%.c=%.o)
 
+FLAGS					= -Wall -Wextra -Werror
 
-all: $(TARGET)
+$(NAME)		:	$(OBJS)
+			gcc $(FLAGS) -c $(SRCS) -I./
+			ar rc $(NAME) $(OBJS)
 
-%.o: %.c
-	gcc $(CFLAGS) -c $<
+all	:	$(NAME)
 
-$(TARGET): $(OBJECTS)
-	gcc $(CFLAGS) -o $@ $^
+bonus	:	$(NAME)
+		gcc $(FLAGS) -c $(BNS_SRCS) -I./
+		ar rc $(NAME) $(BNS_OBJS)
 
-clean:
-	rm -f $(OBJECTS)
+clean	:
+		rm -f $(OBJS) $(BNS_OBJS)
 
-fclean: clean
-	rm -f $(TARGET)
+fclean	:	clean
+		rm -f $(NAME)
 
-re: fclean all
+re	:	fclean all
+
+.PHONY	:	all clean fclean re

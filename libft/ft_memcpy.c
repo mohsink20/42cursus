@@ -13,6 +13,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t a)
 			++i;
 		}
 	}
-	return dst;
+	return dest;
 }
 

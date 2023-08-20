@@ -4,7 +4,7 @@ int	ft_isalpha(int a)
 {
 	if (a >= 'A' && a <= 'Z')
 		return (1);
-	else if (c >= 'a' && c <= 'z')
+	else if (a >= 'a' && a <= 'z')
 		return (2);
 	return (0);
 }

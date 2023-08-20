@@ -10,7 +10,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	while (s[i])
 	{
-		buf[i] = f(i, s[i]);
+		buffer[i] = f(i, s[i]);
 		++i;
 	}
 	buffer[i] = '\0';
