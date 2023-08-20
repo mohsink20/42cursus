@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	ft_putchar_fd(char a, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &a, 1);
+	write(fd, &c, 1);
 }
