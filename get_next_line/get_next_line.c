@@ -21,14 +21,14 @@ int		get_next_line(int fd, char **line)
 	{
 		split_store(&store[fd], line);
 	}
-	
+
 	if (bytes == 0 && !ft_strchr(store[fd], '\n'))
 	{
 		*line = ft_strdup(store[fd]);
 		free(store[fd]);
 		store[fd] = NULL;
 	}
-	
+
 	return (bytes);
 }
 
@@ -77,6 +77,7 @@ void	split_store(char **store, char **line)
 	*store = tmp;
 }
 
+/*
 #include <stdio.h>
 
 int main()
@@ -112,4 +113,4 @@ int main()
 
     return 0;
 }
-
+*/
