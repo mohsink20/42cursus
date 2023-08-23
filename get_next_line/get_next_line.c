@@ -2,48 +2,73 @@
 
 int		get_next_line(int fd, char **line)
 {
-	int				bytes;
-	static char		*store[OPEN_MAX];
+	int	bytes;
+	static char	*store[OPEN_MAX];
 
 	if (fd < 0 || fd > OPEN_MAX || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	store[fd] = (store[fd] == NULL) ? ft_strdup("") : store[fd];
+
+	if (store[fd] == NULL)
+		store[fd] = ft_strdup("");
 	bytes = 1;
+
 	while (bytes > 0 && !ft_strchr(store[fd], '\n'))
+	{
 		bytes = read_buffer(fd, &store[fd]);
+	}
+
 	if (ft_strchr(store[fd], '\n'))
+	{
 		split_store(&store[fd], line);
+	}
+	
 	if (bytes == 0 && !ft_strchr(store[fd], '\n'))
 	{
 		*line = ft_strdup(store[fd]);
 		free(store[fd]);
 		store[fd] = NULL;
 	}
+	
 	return (bytes);
 }
 
-int		read_buffer(int fd, char **store)
+int	read_buffer(int fd, char **store)
 {
-	int				bytes;
-	char			*tmp;
-	char			*buffer;
+	int	bytes;
+	char	*tmp;
+	char	*buffer;
 
-	buffer = (BUFFER_SIZE > 0) ? malloc(sizeof(char) * (BUFFER_SIZE + 1)) : NULL;
-	if ((bytes = read(fd, buffer, BUFFER_SIZE)) < 0 || buffer == NULL)
+	if (BUFFER_SIZE <= 0)
 		return (-1);
+
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == NULL)
+		return (-1);
+
+	bytes = read(fd, buffer, BUFFER_SIZE);
+	if (bytes < 0)
+	{
+		free(buffer);
+		return (-1);
+	}
+
 	buffer[bytes] = '\0';
 	tmp = ft_strjoin(*store, buffer);
 	free(*store);
 	*store = tmp;
 	free(buffer);
-	buffer = NULL;
-	return ((bytes > 1) ? 1 : bytes);
+
+	if (bytes > 1)
+		return (1);
+	else
+		return (0);
 }
+
 
 void	split_store(char **store, char **line)
 {
-	size_t			len;
-	char			*tmp;
+	size_t	len;
+	char	*tmp;
 
 	len = ft_strchr(*store, '\n') - *store;
 	*line = ft_substr(*store, 0, len);
@@ -51,9 +76,6 @@ void	split_store(char **store, char **line)
 	free(*store);
 	*store = tmp;
 }
-
-
-/*
 
 #include <stdio.h>
 
@@ -90,4 +112,4 @@ int main()
 
     return 0;
 }
-*/
+
