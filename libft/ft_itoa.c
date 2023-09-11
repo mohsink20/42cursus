@@ -16,7 +16,7 @@ static size_t	get_digits(int n)
 {
 	size_t	i;
 
-	i = 1;
+	i = 0;
 	while (n != 0)
 	{
 		n /= 10;
@@ -33,7 +33,7 @@ char	*ft_itoa(int n)
 
 	num = n;
 	digits = get_digits(n);
-	if (n < 0)
+	if (n <= 0)
 	{
 		num *= -1;
 		digits++;
