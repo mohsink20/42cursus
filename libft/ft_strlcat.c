@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mokhan <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/07 18:08:13 by mokhan            #+#    #+#             */
+/*   Updated: 2023/09/07 18:08:18 by mokhan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-size_t ft_strlcat(char *dest, const char *src, size_t dsize)
+size_t	ft_strlcat(char *dest, const char *src, size_t dsize)
 {
 	size_t	i;
 

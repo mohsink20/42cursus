@@ -1,27 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mokhan <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/07 17:32:24 by mokhan            #+#    #+#             */
+/*   Updated: 2023/09/07 17:35:34 by mokhan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_atoi(const char *s)
+int	ft_atoi(const char *str)
 {
-	int			sign;
-	long long	result;
+	int	i;
+	int	s;
+	int	res;
 
-	sign = 1;
-	result = 0;
-	while (*s == ' ' || *s == '\n' || *s == '\t' ||
-			*s == '\v' || *s == '\r' || *s == '\f')
-		++s;
-	if (*s == '-' || *s == '+')
-		if (*s++ == '-')
-			sign = -1;
-	while (ft_isdigit(*s))
+	i = 0;
+	s = 1;
+	res = 0;
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		if ((result >= 0) != ((result << 1) >= 0) ||
-				(result >= 0) != ((result << 2) >= 0) ||
-				(result >= 0) != ((result << 3) >= 0) ||
-				(result >= 0) != (result * 10 + (*s - '0') >= 0))
-			return (sign == 1 ? -1 : 0);
-		result = result * 10 + (*s++ - '0');
+		if (str[i] == '-')
+			s = -1;
+		i++;
 	}
-	return (result * sign);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = (res * 10) + (str[i] - '0');
+		i++;
+	}
+	return (res * s);
 }
