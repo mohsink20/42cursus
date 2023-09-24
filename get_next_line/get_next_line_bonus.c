@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mokhan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 11:42:03 by mokhan            #+#    #+#             */
-/*   Updated: 2023/09/22 11:42:05 by mokhan           ###   ########.fr       */
+/*   Created: 2023/09/22 14:36:27 by mokhan            #+#    #+#             */
+/*   Updated: 2023/09/22 14:36:37 by mokhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*read_line(int fd, char *buf, char *backup)
 {
@@ -67,42 +67,18 @@ char	*get_next_line(int fd)
 {
 	char		*buf;
 	char		*line;
-	static char	*backup;
+	static char	*backup[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);
 	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
-	line = read_line(fd, buf, backup);
+	line = read_line(fd, buf, backup[fd]);
 	free(buf);
+	buf = NULL;
 	if (!line)
 		return (NULL);
-	backup = extract(line);
+	backup[fd] = extract(line);
 	return (line);
 }
-/*
-#include <fcntl.h>
-#include <stdio.h>
-
-int	main(void)
-{
-	int	fd;
-	char	*line;
-
-	fd = open("test_get_next_line.txt", O_RDONLY);
-
-	if (fd == -1)
-	{
-		perror("Error opening file");
-		return (1);
-	}
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s\n", line);
-		free(line);
-	}
-	close(fd);
-	return 0;
-}
-*/
