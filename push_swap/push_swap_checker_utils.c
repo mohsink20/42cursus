@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_checker_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mokhan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/22 15:37:25 by mokhan            #+#    #+#             */
-/*   Updated: 2023/12/22 15:37:26 by mokhan           ###   ########.fr       */
+/*   Created: 2023/12/24 18:21:21 by mokhan            #+#    #+#             */
+/*   Updated: 2023/12/24 18:21:22 by mokhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,46 @@ int	is_sorted(t_stack *a)
 	return (-1);
 }
 
-int	main(int argc, char **argv)
+void	print_res(t_data *d)
 {
-	struct s_data	d;
-	char			**argm;
-	int				i;
-
-	d.b = NULL;
-	if (argc == 2)
-	{
-		i = 0;
-		argm = ft_split(argv[1], ' ');
-		while (argm[i])
-			i++;
-		d.a = init_stack(&d, i, argm, 0);
-		ft_free((void **)argm);
-	}
+	if (is_sorted(d->a) == 0 || ps_lstsize(d->b) != 0)
+		printf("KO\n");
 	else
-		d.a = init_stack(&d, argc - 1, argv, 1);
-	if (argc > 1)
-	{
-		if (is_sorted(d.a) == 0)
-			do_sort(&d);
-		ps_lstclear(&d.a);
-		if (is_sorted(d.a) == 0)
-			ps_lstclear(&d.b);
-	}
-	return (0);
+		printf("OK\n");
 }
+
+void	ps(t_data *d, char *cmd)
+{
+	char	*c;
+
+	c = (char *) malloc (sizeof(char *) * ft_strlen(cmd));
+	ft_strlcpy(c, cmd, ft_strlen(cmd));
+	cmd_sp(d, c);
+	if (d->flg == 1)
+	{
+		free(c);
+		free(cmd);
+		printf("Error\n");
+		exit(EXIT_FAILURE);
+	}
+	free(c);
+}
+
+void	get_input(t_data *d)
+{
+	char	*cmd;
+
+	cmd = get_next_line(0);
+	if (cmd)
+	{
+		while (cmd)
+		{
+			ps(d, cmd);
+			free(cmd);
+			cmd = get_next_line(0);
+		}
+	}
+	free(cmd);
+	print_res(d);
+}
+

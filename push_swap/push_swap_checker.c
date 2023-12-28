@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_checker.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mokhan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/22 15:37:25 by mokhan            #+#    #+#             */
-/*   Updated: 2023/12/22 15:37:26 by mokhan           ###   ########.fr       */
+/*   Created: 2023/12/23 00:39:38 by mokhan            #+#    #+#             */
+/*   Updated: 2023/12/23 00:39:39 by mokhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	is_sorted(t_stack *a)
-{
-	t_stack	*tmp;
-
-	tmp = a;
-	while (tmp != NULL && tmp->nxt != NULL)
-	{
-		if (tmp->i > tmp->nxt->i)
-			return (0);
-		tmp = tmp->nxt;
-	}
-	return (-1);
-}
 
 int	main(int argc, char **argv)
 {
@@ -46,8 +32,7 @@ int	main(int argc, char **argv)
 		d.a = init_stack(&d, argc - 1, argv, 1);
 	if (argc > 1)
 	{
-		if (is_sorted(d.a) == 0)
-			do_sort(&d);
+		get_input(&d);
 		ps_lstclear(&d.a);
 		if (is_sorted(d.a) == 0)
 			ps_lstclear(&d.b);
