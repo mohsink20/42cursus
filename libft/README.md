@@ -1,3 +1,5 @@
+# Score: 125/100
+
 # Libft - Your Very First Own Library
 
 ## Summary

@@ -1,3 +1,5 @@
+# Score: 125/100
+
 # Get Next Line
 Reading a line from a file descriptor is way too tedious
 
