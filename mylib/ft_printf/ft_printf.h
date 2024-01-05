@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include <stdbool.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 # define HEXBASE "0123456789abcdef"
 
