@@ -1,6 +1,6 @@
 #include <iostream>
 
-static	void	printInput(char c)
+static	void	changeCase(char c)
 {
 	if (c >= 'a' && c <= 'z')
 		c = c - 'a' + 'A';
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 			int j = 0;
 			while (argv[i][j])
 			{
-				printInput(argv[i][j]);
+				changeCase(argv[i][j]);
 				j++;
 			}
 		}
