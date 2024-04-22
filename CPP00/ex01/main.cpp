@@ -21,7 +21,7 @@ int main()
         std::getline(std::cin, command);
         if (std::cin.eof())
         {
-            std::cout << "CTRL D detected! Exiting phonebook cleanly" << std::endl;
+            std::cout << "Exiting..." << std::endl;
             break;
         }
         if (isNotValid(command))
